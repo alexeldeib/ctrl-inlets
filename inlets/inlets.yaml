@@ -20,7 +20,7 @@ spec:
         args:
         - "client"
         - "--remote=ws://192.168.0.107:8080"
-        - "--upstream=https://vault.default.svc:9201"
+        - "--upstream=https://ctrl-inlets-webhook-service.ctrl-inlets-system.svc:443"
         - "--token-from=/var/inlets/token"
         volumeMounts:
           - name: inlets-token-volume
