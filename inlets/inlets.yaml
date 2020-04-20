@@ -1,0 +1,31 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: inlets
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: inlets
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: inlets
+    spec:
+      containers:
+      - name: inlets-webhook
+        image: inlets/inlets:2.7.0
+        imagePullPolicy: IfNotPresent
+        command: ["inlets"]
+        args:
+        - "client"
+        - "--remote=ws://192.168.0.107:8080"
+        - "--upstream=https://vault.default.svc:9201"
+        - "--token-from=/var/inlets/token"
+        volumeMounts:
+          - name: inlets-token-volume
+            mountPath: /var/inlets/
+      volumes:
+        - name: inlets-token-volume
+          secret:
+            secretName: inlets-token

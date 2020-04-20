@@ -1,0 +1,7 @@
+domain: alexeldeib.xyz
+repo: github.com/alexeldeib/ctrl-inlets
+resources:
+- group: workloads
+  kind: Demo
+  version: v1
+version: "2"
